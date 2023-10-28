@@ -23,9 +23,9 @@ charName x = "Not in the list of names"
 addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)
 addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
 
-head' :: [a] -> a
+{-head' :: [a] -> a
 head' [] = error "Can't call head on an empty list, dummy!"
-head' (x:_) = x
+head' (x:_) = x-}
 
 length' :: (Num b) => [a] -> b
 length' [] = 0
@@ -70,6 +70,19 @@ initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
     where (f:_) = firstname
           (l:_) = lastname
 
-calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+{-calcBmis :: (RealFloat a) => [(a, a)] -> [a]
 calcBmis xs = [bmi w h | (w, h) <- xs]
-    where bmi weight height = weight / height ^ 2
+    where bmi weight height = weight / height ^ 2-}
+
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h =
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^ 2
+    in sideArea + 2 * topArea
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2]
+
+head' :: [a] -> a
+head' xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
