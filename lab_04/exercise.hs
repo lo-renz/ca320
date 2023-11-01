@@ -1,3 +1,5 @@
+-- First Part of the lab.
+
 -- Append two lists.
 -- Exam solution with Recursion
 {-myAppend :: [a] -> [a] -> [a]
@@ -91,3 +93,24 @@ myDelete _ [] = []
 myDelete x (y:ys)
     | x == y = ys
     | otherwise = y:(myDelete x ys)
+
+-- Second Part of the lab
+-- returns the list union of the two lists. Duplicates, and elements of the first list, are removed from the the
+-- second list, but if the first list contains duplicates, so will the result. . For example,
+-- myUnion [1,3,5,1] [2,2,3,4] == [1,3,5,1,2,4]
+
+myUnion :: (Eq a) => [a] -> [a] -> [a]
+myUnion x [] = x
+myUnion x (y:ys)
+    | myElem y x = myUnion x ys
+    | otherwise = myUnion (x++[y]) ys
+
+-- returns the list intersection of two lists. For example,
+-- myIntersect [1,2,3,4] [2,4,6,8] == [2,4]
+-- If the first list contains duplicates, so will the result.
+-- myIntersect [1,2,2,3,4] [6,4,4,2] == [2,2,4]
+myIntersect :: (Eq a) => [a] -> [a] -> [a]
+myIntersect [] _ = []
+myIntersect (x:xs) y
+    | myElem x y = x:(myIntersect xs y)
+    | otherwise = myIntersect xs y
