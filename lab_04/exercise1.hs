@@ -1,71 +1,93 @@
+-- Append two lists.
+-- Exam solution with Recursion
+{-myAppend :: [a] -> [a] -> [a]
+myAppend x [] = x
+myAppend [] x = x
+myAppend (x:xs) y = x:(myAppend xs y)-}
+
+-- My implementation
 myAppend :: [a] -> [a] -> [a]
 myAppend [] x = x
-myAppend (x:xs) y = x:(myAppend xs y)
+myAppend x y = x ++ y
 
+-- Extract the first element of a list, which must be non-empty.
 myHead :: [a] -> a
-myHead [] = error "Empty list"
-myHead (x:_) = x
+myHead [] = error "Empty list."
+--myHead (x:xs) = x
+myHead x = x !! 0
 
-myLast :: [a] -> a
-myLast [] = error "Empty list"
-myLast [x] = x
-myLast (_:xs) = myLast xs
+-- Extract the last element of a list, which must be finite and non-empty.
+myLast :: (Ord a) => [a] -> a
+myLast (x:xs)
+    | length xs == 0 = x
+    | otherwise = myLast xs
 
+--myLast x = x !! ((length x) - 1)
+
+-- Extract the elements after the head of a list, which must be non-empty.
 myTail :: [a] -> [a]
-myTail [] = error "Empty list"
-myTail (_:xs) = xs
+myTail [] = error "Empty list."
+myTail (x:xs) = xs
 
-myInit :: [a] -> [a]
-myInit [] = error "Empty list"
+-- Return all the elements of a list except the last one. The list must be non-empty.
+myInit :: (Ord a) => [a] -> [a]
+myInit [] = error "Empty list."
 myInit [x] = []
 myInit (x:xs) = x:(myInit xs)
 
+-- Return the length of a finite list as an Int.
 myLength :: [a] -> Int
 myLength [] = 0
-myLength (_:xs) = 1 + myLength(xs)
+myLength (x:xs) = 1 + (myLength xs)
 
+-- Return the elements of xs in reverse order. xs must be finite.
 myReverse :: [a] -> [a]
 myReverse [] = []
 myReverse (x:xs) = myReverse xs ++ [x]
 
--- myConcat doesn't work
-myConcat :: [a] -> [a] -> [a]
-myConcat [] [y] = [y]
-myConcat [x] [] = [x]
-myConcat (x:xs) y = x:(myConcat xs y)
+-- Concatenate a list of lists.
+myConcat :: [[a]] -> [a]
+myConcat [x] = x
+myConcat (x:xs) = x ++ (myConcat xs)
 
+-- Computes the sum of a finite list of numbers.
 mySum :: (Num a) => [a] -> a
 mySum [] = 0
 mySum (x:xs) = x + (mySum xs)
 
+-- Computes the product of a finite list of numbers.
 myProduct :: (Num a) => [a] -> a
-myProduct [x] = x
+myProduct [] = 1
 myProduct (x:xs) = x * (myProduct xs)
 
+-- Returns the maximum value from a list, which must be non-empty, finite and of an ordered type.
 myMaximum :: (Ord a) => [a] -> a
-myMaximum [] = error "Empty list"
+myMaximum [] = error "Empty list."
 myMaximum [x] = x
 myMaximum (x:xs)
     | x > maxTail = x
     | otherwise = maxTail
     where maxTail = myMaximum xs
 
+-- Returns the minimum value from a list, which must be non-empty, finite, and of an ordered type.
 myMinimum :: (Ord a) => [a] -> a
-myMinimum [] = error "Empty list"
+myMinimum [] = error "Empty list."
 myMinimum [x] = x
 myMinimum (x:xs)
     | x < minTail = x
     | otherwise = minTail
     where minTail = myMinimum xs
 
+-- The list membership predicate
 myElem :: (Eq a) => a -> [a] -> Bool
 myElem _ [] = False
-myElem x (y:ys) = if x == y
-                    then True
-                  else (myElem x ys)
+myElem x (y:ys)
+    | x == y = True
+    | otherwise = myElem x ys
 
+-- Removes the first occurence of x from its list argument.
 myDelete :: (Eq a) => a -> [a] -> [a]
 myDelete _ [] = []
-myDelete x (y:ys) = if x == y
-                      then ys
-                    else y:(myDelete x ys)
+myDelete x (y:ys)
+    | x == y = ys
+    | otherwise = y:(myDelete x ys)
