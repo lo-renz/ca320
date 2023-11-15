@@ -95,7 +95,7 @@ myDelete x (y:ys)
     | otherwise = y:(myDelete x ys)
 
 -- Second Part of the lab
--- returns the list union of the two lists. Duplicates, and elements of the first list, are removed from the the
+-- returns the list union of the two lists. Duplicates, and elements of the first list, are removed from the
 -- second list, but if the first list contains duplicates, so will the result. . For example,
 -- myUnion [1,3,5,1] [2,2,3,4] == [1,3,5,1,2,4]
 
