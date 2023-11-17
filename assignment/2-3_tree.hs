@@ -29,23 +29,26 @@ add x (TwoNode y left right)
     | x < y     = ThreeNode x y left Empty right
     | otherwise = ThreeNode y x left Empty right
 add x (ThreeNode y z left middle right)
-    | x <= y          = ThreeNode y z (twoLeaf x) middle right
-    | x > y && x <= z = ThreeNode y z left (twoLeaf x) right
-    | x > z           = ThreeNode y z left middle (twoLeaf x)
+    | x <= y          = ThreeNode y z (add x left) middle right
+    | x > y && x <= z = ThreeNode y z left (add x middle) right
+    | x > z           = ThreeNode y z left middle (add x right)
     | otherwise = error "Something wrong happened"
 
 main :: IO()
 main = do
     let xList = [3, 10, 15, 20, 6, 18]
 
-    -- Works
+    -- To show off the implementation of add(X, T)
+    -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
     let t1 = Empty
     putStrLn (show (add (xList !! 0) t1))
     let t2 = add (xList !! 0) t1
     putStrLn (show (add (xList !! 1) t2))
     let t3 = add (xList !! 1) t2
     putStrLn (show (add (xList !! 2) t3))
-
-    -- Doesn't work 
     let t4 = add (xList !! 2) t3
     putStrLn (show (add (xList !! 3) t4))
+    let t5 = add (xList !! 3) t4
+    putStrLn (show (add (xList !! 4) t5))
+    let t6 = add (xList !! 4) t5
+    putStrLn (show (add (xList !! 5) t6))
