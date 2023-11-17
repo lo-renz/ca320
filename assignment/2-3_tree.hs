@@ -39,11 +39,11 @@ add x (ThreeNode y z left middle right)
 member :: (Ord t) => t -> TwoThreeTree t -> Bool
 member x Empty = False
 member x (TwoNode y _ _)
-    | x == y = True
+    | x == y    = True
     | otherwise = False
 member x (ThreeNode y z _ _ _)
-    | x == y = True
-    | x == z = True
+    | x == y    = True
+    | x == z    = True
     | otherwise = False
 member x (TwoNode y left right)
     | x < y     = member x left
@@ -77,4 +77,4 @@ main = do
     putStrLn (show (""))
 
     let t7 = add (xList !! 5) t6
-    putStrLn (show (member 69 t7))
+    putStrLn (show (member 18 t7))
