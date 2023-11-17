@@ -38,21 +38,18 @@ add x (ThreeNode y z left middle right)
 -- Implementation of member(X, T) which returns true if X is in the 2-3 Tree T.
 member :: (Ord t) => t -> TwoThreeTree t -> Bool
 member x Empty = False
-member x (TwoNode y _ _)
+member x (TwoNode y left right)
     | x == y    = True
+    | x < y = member x left
+    | x > y = member x right
     | otherwise = False
-member x (ThreeNode y z _ _ _)
+member x (ThreeNode y z left middle right)
     | x == y    = True
     | x == z    = True
-    | otherwise = False
-member x (TwoNode y left right)
-    | x < y     = member x left
-    | otherwise = member x right
-member x (ThreeNode y z left middle right)
     | x <= y          = member x left
     | x > y && x <= z = member x middle
     | x > z           = member x right
-    | otherwise       = error "Something wrong happened"
+    | otherwise       = False
 
 -- A main function which shows off the implementation of the functions by printing the output of the functions to standard output.
 main :: IO()
@@ -77,4 +74,4 @@ main = do
     putStrLn (show (""))
 
     let t7 = add (xList !! 5) t6
-    putStrLn (show (member 18 t7))
+    putStrLn (show (member 100 t7))
