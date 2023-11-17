@@ -74,4 +74,11 @@ main = do
     putStrLn (show (""))
 
     let t7 = add (xList !! 5) t6
+    putStrLn (show (member 3 t7))
+    putStrLn (show (member 10 t7))
+    putStrLn (show (member 15 t7))
+    putStrLn (show (member 20 t7))
+    putStrLn (show (member 6 t7))
+    putStrLn (show (member 18 t7))
+    putStrLn (show (member 0 t7))
     putStrLn (show (member 100 t7))
