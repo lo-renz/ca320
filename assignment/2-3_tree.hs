@@ -10,20 +10,25 @@
    root element, and a right subtree in which all the elements greater than the second root element.
 -}
 data TwoThreeTree t = Empty
-                    | OneRoot t (TwoThreeTree t) (TwoThreeTree t)
-                    | TwoRoot t t (TwoThreeTree t) (TwoThreeTree t) (TwoThreeTree t)
+                    | TwoNode t (TwoThreeTree t) (TwoThreeTree t)
+                    | ThreeNode t t (TwoThreeTree t) (TwoThreeTree t) (TwoThreeTree t)
                     deriving (Eq, Ord, Show)
 
 
-twoLeaf x = OneRoot x Empty Empty
-threeLeaf x y = TwoRoot Empty Empty Empty
+-- Tree from assignment spec can be respresented as follows
+myTree1 = ThreeNode 3 10 Empty (TwoNode 6 Empty Empty) (ThreeNode 15 20 Empty (TwoNode 18 Empty Empty) Empty)
+
+twoLeaf x = TwoNode x Empty Empty
+threeLeaf x y = ThreeNode x y Empty Empty Empty
+
+myThree2 = ThreeNode 3 10 Empty (twoLeaf 6) (ThreeNode 15 20 Empty (twoLeaf 18) Empty)
 
 addNode :: (Ord t) => t -> TwoThreeTree t -> TwoThreeTree t
 -- Adding an element to an empty node.
 addNode a Empty = twoLeaf a
-addNode x (Root a left right)
-    | x < a = OneRoot a (addNode x left) right
-    | otherwise = OneRoot a left (addNode x right)
+addNode x (TwoNode a left right)
+    | x < a = TwoNode a (addNode x left) right
+    | otherwise = TwoNode a left (addNode x right)
 
 -- Adding an element to a 2-node.
-addNode x y = 
+--addNode x y = 
