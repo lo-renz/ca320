@@ -23,7 +23,7 @@ threeLeaf x y = ThreeNode x y Empty Empty Empty
 
 myThree2 = ThreeNode 3 10 Empty (twoLeaf 6) (ThreeNode 15 20 Empty (twoLeaf 18) Empty)
 
--- Implementation of add(X, T) which returns the 2-3 Tree from adding X to the 2-3 Tree T.
+-- Implementation of add(X, T), which returns the 2-3 Tree from adding X to the 2-3 Tree T.
 {- Explanation:
 -}
 add :: (Ord t) => t -> TwoThreeTree t -> TwoThreeTree t
@@ -37,7 +37,7 @@ add x (ThreeNode y z left middle right)
     | x > z           = ThreeNode y z left middle (add x right)
     | otherwise = error "Something wrong happened"
 
--- Implementation of member(X, T) which returns true if X is in the 2-3 Tree T.
+-- Implementation of member(X, T), which returns true if X is in the 2-3 Tree T.
 {- Explanation:
 -}
 member :: (Ord t) => t -> TwoThreeTree t -> Bool
@@ -54,6 +54,12 @@ member x (ThreeNode y z left middle right)
     | x > y && x <= z = member x middle
     | x > z           = member x right
     | otherwise       = False
+
+-- Implementation of height(T), which returns the height of T.
+height :: TwoThreeTree t -> Int
+height Empty = -1
+height (TwoNode x left right) = (max (height left) (height right)) + 1
+height (ThreeNode x y left middle right) = (max (height left) (max (height middle) (height right))) + 1
 
 -- A main function which shows off the implementation of the functions by printing the output of the functions to standard output.
 main :: IO()
@@ -75,7 +81,7 @@ main = do
     let t6 = add (xList !! 4) t5
     putStrLn (show (add (xList !! 5) t6))
 
-    putStrLn (show ("")) -- Just to separate the function prints.
+    putStrLn (show ("----")) -- Just to separate the function prints.
 
     -- To show off the implementation of member(X, T).
     -- Which returns true if X is in the 2-3 Tree T.
@@ -88,3 +94,24 @@ main = do
     putStrLn (show (member 18 t7))
     putStrLn (show (member 0 t7))
     putStrLn (show (member 100 t7))
+
+    putStrLn (show ("----")) -- Just to separate the function prints.
+
+    -- To show off the implementation of height(T).
+    -- Which returns the height of the 2-3 Tree.
+    let emptyTree = Empty
+    putStrLn(show (height emptyTree))
+    let binTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
+    putStrLn (show (height binTree))
+    putStrLn(show (height t7))
+    let t8 = add 19 t7
+    let t9 = add 19 t8
+    putStrLn(show t9)
+    let t10 = add 19 t9
+    putStrLn(show (height t10))
+
+
+{- References:
+-- Used this link to figure out how to calculate the height of a tree data structure.
+[1] https://www.digitalocean.com/community/tutorials/height-of-a-tree-data-structure
+-}
