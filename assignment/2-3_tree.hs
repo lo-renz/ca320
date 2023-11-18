@@ -24,6 +24,8 @@ threeLeaf x y = ThreeNode x y Empty Empty Empty
 myThree2 = ThreeNode 3 10 Empty (twoLeaf 6) (ThreeNode 15 20 Empty (twoLeaf 18) Empty)
 
 -- Implementation of add(X, T) which returns the 2-3 Tree from adding X to the 2-3 Tree T.
+{- Explanation:
+-}
 add :: (Ord t) => t -> TwoThreeTree t -> TwoThreeTree t
 add x Empty = twoLeaf x
 add x (TwoNode y left right)
@@ -36,6 +38,8 @@ add x (ThreeNode y z left middle right)
     | otherwise = error "Something wrong happened"
 
 -- Implementation of member(X, T) which returns true if X is in the 2-3 Tree T.
+{- Explanation:
+-}
 member :: (Ord t) => t -> TwoThreeTree t -> Bool
 member x Empty = False
 member x (TwoNode y left right)
@@ -56,7 +60,7 @@ main :: IO()
 main = do
     let xList = [3, 10, 15, 20, 6, 18]
 
-    -- To show off the implementation of add(X, T)
+    -- To show off the implementation of add(X, T).
     -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
     let t1 = Empty
     putStrLn (show (add (xList !! 0) t1))
@@ -71,8 +75,10 @@ main = do
     let t6 = add (xList !! 4) t5
     putStrLn (show (add (xList !! 5) t6))
 
-    putStrLn (show (""))
+    putStrLn (show ("")) -- Just to separate the function prints.
 
+    -- To show off the implementation of member(X, T).
+    -- Which returns true if X is in the 2-3 Tree T.
     let t7 = add (xList !! 5) t6
     putStrLn (show (member 3 t7))
     putStrLn (show (member 10 t7))
