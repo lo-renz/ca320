@@ -1,3 +1,5 @@
+import Data.Char
+
 {-
  A datatype which depicts that a 2-3 Tree can either be:
  - An empty tree
@@ -67,10 +69,18 @@ member x (ThreeNode y z left middle right)
   | otherwise = False
 
 -- Implementation of height(T), which returns the height of T.
+{- Explanation: [1]
+-}
 height :: TwoThreeTree t -> Int
 height Empty = -1
 height (TwoNode x left right) = (max (height left) (height right)) + 1
 height (ThreeNode x y left middle right) = (max (height left) (max (height middle) (height right))) + 1
+
+-- Implementation of prettyPrint(T), which is always true and displays the 2- Tree T.
+{- Explanation:
+-}
+--prettyPrint :: (Eq t, Show t) => TwoThreeTree t -> IO ()
+--prettyPrint (TwoNode x left right)
 
 -- A main function which shows off the implementation of the functions by printing the output of the functions to standard output.
 main :: IO ()
@@ -79,6 +89,7 @@ main = do
 
   -- To show off the implementation of add(X, T).
   -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
+  -- print () = putStrLn (show ())
   let t1 = Empty
   putStrLn (show (add (xList !! 0) t1))
   let t2 = add (xList !! 0) t1
@@ -92,34 +103,41 @@ main = do
   let t6 = add (xList !! 4) t5
   putStrLn (show (add (xList !! 5) t6))
 
-  putStrLn (show ("----")) -- Just to separate the function prints.
+  print "----" -- Just to separate the function prints.
 
   -- To show off the implementation of member(X, T).
   -- Which returns true if X is in the 2-3 Tree T.
   let t7 = add (xList !! 5) t6
-  putStrLn (show (member 3 t7))
-  putStrLn (show (member 10 t7))
-  putStrLn (show (member 15 t7))
-  putStrLn (show (member 20 t7))
-  putStrLn (show (member 6 t7))
-  putStrLn (show (member 18 t7))
-  putStrLn (show (member 0 t7))
-  putStrLn (show (member 100 t7))
+  print (member 3 t7)
+  print (member 10 t7)
+  print (member 15 t7)
+  print (member 20 t7)
+  print (member 6 t7)
+  print (member 100 t7)
+  print (member 18 t7)
+  print (member 0 t7)
 
-  putStrLn (show ("----")) -- Just to separate the function prints.
+  print "----" -- Just to separate the function prints.
 
   -- To show off the implementation of height(T).
   -- Which returns the height of the 2-3 Tree.
   let emptyTree = Empty
   putStrLn (show (height emptyTree))
-  let binTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
-  putStrLn (show (height binTree))
+  let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
+  putStrLn (show (height twoNodeTree))
   putStrLn (show (height t7))
   let t8 = add 19 t7
   let t9 = add 19 t8
   putStrLn (show t9)
   let t10 = add 19 t9
   putStrLn (show (height t10))
+
+  print "----" -- Just to separate the function prints.
+
+ -- To show off the implementation of prettyPrint(T).
+ -- Which displays the contetns of the 2-3 Tree in an easily readable format.
+  --let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
+  --prettyPrint(twoNodeTree)
 
 {- References:
 -- Used this link to figure out how to calculate the height of a tree data structure.
