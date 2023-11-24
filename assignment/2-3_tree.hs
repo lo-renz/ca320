@@ -107,17 +107,17 @@ main = do
   -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
   -- print () = putStrLn (show ())
   let t1 = Empty
-  putStrLn (show (add (xList !! 0) t1))
+  print (add (xList !! 0) t1)
   let t2 = add (xList !! 0) t1
-  putStrLn (show (add (xList !! 1) t2))
+  print (add (xList !! 1) t2)
   let t3 = add (xList !! 1) t2
-  putStrLn (show (add (xList !! 2) t3))
+  print (add (xList !! 2) t3)
   let t4 = add (xList !! 2) t3
-  putStrLn (show (add (xList !! 3) t4))
+  print (add (xList !! 3) t4)
   let t5 = add (xList !! 3) t4
-  putStrLn (show (add (xList !! 4) t5))
+  print (add (xList !! 4) t5)
   let t6 = add (xList !! 4) t5
-  putStrLn (show (add (xList !! 5) t6))
+  print (add (xList !! 5) t6)
 
   print "----" -- Just to separate the function prints.
 
@@ -138,15 +138,15 @@ main = do
   -- To show off the implementation of height(T).
   -- Which returns the height of the 2-3 Tree.
   let emptyTree = Empty
-  putStrLn (show (height emptyTree))
+  print (height emptyTree)
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
-  putStrLn (show (height twoNodeTree))
-  putStrLn (show (height t7))
+  print (height twoNodeTree)
+  print (height t7)
   let t8 = add 19 t7
   let t9 = add 19 t8
-  putStrLn (show t9)
+  print t9
   let t10 = add 19 t9
-  putStrLn (show (height t10))
+  print (height t10)
 
   print "----" -- Just to separate the function prints.
 
