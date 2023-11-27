@@ -1,6 +1,3 @@
-import Data.Char
-import Data.Tree
-
 {-
  A datatype which depicts that a 2-3 Tree can either be:
  - An empty tree
@@ -97,12 +94,15 @@ height (ThreeNode x y left middle right) = (max (height left) (max (height middl
 {- Explanation:
 -}
 
+-- Space between the branches
 indent :: [String] -> [String]
-indent = map ("    "++) -- was 2 spaces
+indent = map ("        "++)
 
 layoutTree :: (Show a) => TwoThreeTree a -> [String]
 layoutTree Empty = ["nil"]
 layoutTree (TwoNode x left right) = indent (layoutTree left) ++ [show x] ++ indent (layoutTree right)
+layoutTree (ThreeNode x y left middle right) = indent (layoutTree left) ++ [show (x, y)] ++  indent (layoutTree middle) ++ indent (layoutTree right)
+-- layoutTree (ThreeNode x y left middle right) = indent (layoutTree left) ++ [show (x, y)] ++ indent (layoutTree middle) ++ indent (layoutTree right)
 
 prettyPrint :: (Show a) => TwoThreeTree a -> String
 prettyPrint = unlines.layoutTree
@@ -162,14 +162,17 @@ main = do
  -- To show off the implementation of prettyPrint(T).
  -- Which displays the contetns of the 2-3 Tree in an easily readable format.
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
+  print (layoutTree twoNodeTree)
   
+  print "----" -- Just to separate the function prints.
   -- Testing the print for TwoNode trees.
   putStrLn (prettyPrint twoNodeTree)
 
   print "----" -- Just to separate the function prints.
 
   -- Testing the prettyPrint for ThreeNode trees.
-  --putStrLn (prettyPrint t7) 
+  -- print (layoutTree t7)
+  putStrLn (prettyPrint t7) 
 
 {- References:
 -- Used this link to figure out how to calculate the height of a tree data structure.
