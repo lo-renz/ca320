@@ -174,5 +174,5 @@ main = do
 {- References:
 -- Used this link to figure out how to calculate the height of a tree data structure.
 [1] https://www.digitalocean.com/community/tutorials/height-of-a-tree-data-structurefthree
-[2] https://stackoverflow.com/questions/22290898/displaying-binary-tree-in-haskell
+[2] https://stackoverflow.com/questions/19082560/haskell-pretty-print-binary-tree-not-displaying-properly/19083798#19083798?newreg=75adfcd525aa4e24b6ed7c8365112c76
 -}
