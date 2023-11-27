@@ -96,9 +96,16 @@ height (ThreeNode x y left middle right) = (max (height left) (max (height middl
 -- Implementation of prettyPrint(T), which is always true and displays the 2- Tree T.
 {- Explanation:
 -}
-prettyPrint :: (Show t) => TwoThreeTree t -> Int -> String
-prettyPrint Empty _ = []
-prettyPrint (TwoNode t left right) n = replicate n '*' ++ show t ++ "\n" ++ prettyPrint left (n+1) ++ prettyPrint right (n+1)
+
+indent :: [String] -> [String]
+indent = map ("    "++) -- was 2 spaces
+
+layoutTree :: (Show a) => TwoThreeTree a -> [String]
+layoutTree Empty = ["nil"]
+layoutTree (TwoNode x left right) = indent (layoutTree left) ++ [show x] ++ indent (layoutTree right)
+
+prettyPrint :: (Show a) => TwoThreeTree a -> String
+prettyPrint = unlines.layoutTree
 
 -- A main function which shows off the implementation of the functions by printing the output of the functions to standard output.
 main :: IO ()
@@ -148,14 +155,21 @@ main = do
   let t9 = add 19 t8
   print t9
   let t10 = add 19 t9
-  print (height t10)
+  print (height t7)
 
   print "----" -- Just to separate the function prints.
 
  -- To show off the implementation of prettyPrint(T).
  -- Which displays the contetns of the 2-3 Tree in an easily readable format.
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
-  putStrLn $ prettyPrint twoNodeTree 0
+  
+  -- Testing the print for TwoNode trees.
+  putStrLn (prettyPrint twoNodeTree)
+
+  print "----" -- Just to separate the function prints.
+
+  -- Testing the prettyPrint for ThreeNode trees.
+  --putStrLn (prettyPrint t7) 
 
 {- References:
 -- Used this link to figure out how to calculate the height of a tree data structure.
