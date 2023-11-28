@@ -32,26 +32,12 @@ member x (ThreeNode y z left middle right)
   | x > z = member x right
   | otherwise = False
 
--- Implementation of height(T), which returns the height of T.
-{- Explanation: [1]
- A function which calulates the height of a tree T. It uses pattern matching to check whether the tree
- is empty, a 2-node or 3-node tree and acts accordingly.
-
- The height of an empty tree is -1. [1]
-
- To calculate the height of a binary tree I found the height of its left subtree and right subtree recursively and added 1 to them
- Once I found the height of each subtree, I compared them and took the greatest height of the subtrees by using the built-in funtion 'max'.
--}
+-- [1]
 height :: TwoThreeTree t -> Int
 height Empty = -1
-height (TwoNode x left right) = (max (height left) (height right)) + 1
-height (ThreeNode x y left middle right) = (max (height left) (max (height middle) (height right))) + 1
+height (TwoNode x left right) = max (height left) (height right) + 1
+height (ThreeNode x y left middle right) = max (height left) (max (height middle) (height right)) + 1
 
--- Implementation of prettyPrint(T), which is always true and displays the 2- Tree T.
-{- Explanation:
--}
-
--- Space between the branches
 -- [2]
 indent :: [String] -> [String]
 indent = map ("        "++)
@@ -60,19 +46,19 @@ layoutTree :: (Show a) => TwoThreeTree a -> [String]
 layoutTree Empty = ["nil"]
 layoutTree (TwoNode x left right) = indent (layoutTree left) ++ [show x] ++ indent (layoutTree right)
 layoutTree (ThreeNode x y left middle right) = indent (layoutTree left) ++ [show (x, y)] ++  indent (layoutTree middle) ++ indent (layoutTree right)
--- layoutTree (ThreeNode x y left middle right) = indent (layoutTree left) ++ [show (x, y)] ++ indent (layoutTree middle) ++ indent (layoutTree right)
 
 prettyPrint :: (Show a) => TwoThreeTree a -> String
 prettyPrint = unlines.layoutTree
 
 -- A main function which shows off the implementation of the functions by printing the output of the functions to standard output.
+-- To run this:
+--   First load this file in 'ghci', type main into the interpreter and then press enter.
 main :: IO ()
 main = do
   let xList = [3, 10, 15, 20, 6, 18]
 
   -- To show off the implementation of add(X, T).
-  -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
-  -- print () = putStrLn (show ())
+  print "Showing off the implementation of the add function:"
   let t1 = Empty
   print (add (head xList) t1)
   let t2 = add (head xList) t1
@@ -89,7 +75,7 @@ main = do
   print "----" -- Just to separate the function prints.
 
   -- To show off the implementation of member(X, T).
-  -- Which returns true if X is in the 2-3 Tree T.
+  print "Showing off the implementation of the member function:"
   let t7 = add (xList !! 5) t6
   print (member 3 t7)
   print (member 10 t7)
@@ -103,7 +89,7 @@ main = do
   print "----" -- Just to separate the function prints.
 
   -- To show off the implementation of height(T).
-  -- Which returns the height of the 2-3 Tree.
+  print "Showing off the implementation of the height function:"
   let emptyTree = Empty
   print (height emptyTree)
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
@@ -118,22 +104,17 @@ main = do
   print "----" -- Just to separate the function prints.
 
  -- To show off the implementation of prettyPrint(T).
- -- Which displays the contetns of the 2-3 Tree in an easily readable format.
+  print "Showing off the implementation of the prettyPrint function for '2-node' trees:"
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
-  print (layoutTree twoNodeTree)
-
-  print "----" -- Just to separate the function prints.
-  -- Testing the print for TwoNode trees.
   putStrLn (prettyPrint twoNodeTree)
 
   print "----" -- Just to separate the function prints.
 
   -- Testing the prettyPrint for ThreeNode trees.
-  -- print (layoutTree t7)
+  print "Showing off the implementation of the prettyPrint function for '3-node' trees:"
   putStrLn (prettyPrint t7)
 
 {- References:
--- Used this link to figure out how to calculate the height of a tree data structure.
-[1] https://www.digitalocean.com/community/tutorials/height-of-a-tree-data-structurefthree
-[2] https://stackoverflow.com/questions/19082560/haskell-pretty-print-binary-tree-not-displaying-properly/19083798#19083798?newreg=75adfcd525aa4e24b6ed7c8365112c76
+[1] https://www.digitalocean.com/community/tutorials/height-of-a-tree-data-structure -- Used this link to figure out how to calculate the height of a tree data structure.
+[2] https://stackoverflow.com/questions/19082560/haskell-pretty-print-binary-tree-not-displaying-properly/19083798#19083798?newreg=75adfcd525aa4e24b6ed7c8365112c76 -- Used this link for prettyPrint function.
 -}
