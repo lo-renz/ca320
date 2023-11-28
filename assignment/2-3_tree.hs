@@ -1,40 +1,11 @@
-{-
- A datatype which depicts that a 2-3 Tree can either be:
- - An empty tree
-
- - A node with 1 root element and two subtrees.
-
- - A node with 2 root elements and three subtrees.
--}
 data TwoThreeTree t
   = Empty
   | TwoNode t (TwoThreeTree t) (TwoThreeTree t)
   | ThreeNode t t (TwoThreeTree t) (TwoThreeTree t) (TwoThreeTree t)
   deriving (Eq, Ord, Show)
 
--- Using the above datatype the tree from assignment spec can be respresented as follows:
--- myTree1 = ThreeNode 3 10 Empty (TwoNode 6 Empty Empty) (ThreeNode 15 20 Empty (TwoNode 18 Empty Empty) Empty)
-
 twoLeaf x = TwoNode x Empty Empty
 
--- Using the above, we can rewrite the tree as:
--- myThree2 = ThreeNode 3 10 Empty (twoLeaf 6) (ThreeNode 15 20 Empty (twoLeaf 18) Empty)
-
--- Implementation of add(X, T), which returns the 2-3 Tree from adding X to the 2-3 Tree T.
-{- Explanation:
-  A function which adds a value to a specified tree. It uses pattern matching to check whether the tree is
-  empty, a 2-node or 3-node tree and acts accordingly.
-
-  If an element is being added to an empty tree, then the returned tree is a 2-node tree which contains the
-  added element and two empty subtrees.
-
-  For elements added to a 2-node tree, depending on the element being added to the 2-node tree, the smaller
-  element is added to the left while the bigger element is added to the right.
-
-  I use recursion to add elements to a 3-node tree. This is done depending on the element being added. Let's
-  define x to be the element added to the tree t. Let's also define y and z to be the elements found in the
-  tree t in respective order. If x <= y then the element is added to the left subtree. If y < x <= z then the
--}
 add :: (Ord t) => t -> TwoThreeTree t -> TwoThreeTree t
 add x Empty = twoLeaf x
 add x (TwoNode y left right)
