@@ -17,8 +17,6 @@ data TwoThreeTree t
 
 twoLeaf x = TwoNode x Empty Empty
 
-threeLeaf x y = ThreeNode x y Empty Empty Empty
-
 -- Using the above, we can rewrite the tree as:
 -- myThree2 = ThreeNode 3 10 Empty (twoLeaf 6) (ThreeNode 15 20 Empty (twoLeaf 18) Empty)
 
@@ -82,7 +80,7 @@ member x (ThreeNode y z left middle right)
 
  The height of an empty tree is -1. [1]
 
- To calculate the height of a binary tree I found the height of its left subtree and right subtree recursively and added 1 to them 
+ To calculate the height of a binary tree I found the height of its left subtree and right subtree recursively and added 1 to them
  Once I found the height of each subtree, I compared them and took the greatest height of the subtrees by using the built-in funtion 'max'.
 -}
 height :: TwoThreeTree t -> Int
