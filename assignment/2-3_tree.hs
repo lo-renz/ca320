@@ -72,7 +72,7 @@ main = do
   let t6 = add (xList !! 4) t5
   print (add (xList !! 5) t6)
 
-  print "----" -- Just to separate the function prints.
+  print "------------------------------" -- Just to separate the function prints.
 
   -- To show off the implementation of member(X, T).
   print "Showing off the implementation of the member function:"
@@ -86,7 +86,7 @@ main = do
   print (member 18 t7)
   print (member 0 t7)
 
-  print "----" -- Just to separate the function prints.
+  print "------------------------------" -- Just to separate the function prints.
 
   -- To show off the implementation of height(T).
   print "Showing off the implementation of the height function:"
@@ -101,14 +101,14 @@ main = do
   let t10 = add 19 t9
   print (height t7)
 
-  print "----" -- Just to separate the function prints.
+  print "------------------------------" -- Just to separate the function prints.
 
  -- To show off the implementation of prettyPrint(T).
   print "Showing off the implementation of the prettyPrint function for '2-node' trees:"
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
   putStrLn (prettyPrint twoNodeTree)
 
-  print "----" -- Just to separate the function prints.
+  print "------------------------------" -- Just to separate the function prints.
 
   -- Testing the prettyPrint for ThreeNode trees.
   print "Showing off the implementation of the prettyPrint function for '3-node' trees:"
