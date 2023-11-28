@@ -17,18 +17,6 @@ add x (ThreeNode y z left middle right)
   | x > z = ThreeNode y z left middle (add x right)
   | otherwise = error "Something wrong happened"
 
--- Implementation of member(X, T), which returns true if X is in the 2-3 Tree T.
-{- Explanation:
-
- A function which returns True or False based on whether a value X is in the tree T. It uses pattern matching to check whether the tree is
- empty, a 2-node or 3-node tree and acts accordingly.
-
- My base case for the 2-node trees returns True is the value x is equal to the value of the root. If not then it will recursively check the
- left and right subtrees and make the same check. If none of the patterns match then False is returned.
-
- I applied the same logic for the 3-node trees. If the value x is equal to either the roots y or z then return True. Else recursively check
- either the left, middle and right subtrees. If none of the patterns match then False is returned.
--}
 member :: (Ord t) => t -> TwoThreeTree t -> Bool
 member x Empty = False
 member x (TwoNode y left right)
