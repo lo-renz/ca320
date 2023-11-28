@@ -95,6 +95,7 @@ height (ThreeNode x y left middle right) = (max (height left) (max (height middl
 -}
 
 -- Space between the branches
+-- [2]
 indent :: [String] -> [String]
 indent = map ("        "++)
 
@@ -116,8 +117,8 @@ main = do
   -- Which returns the 2-3 Tree from adding X to the 2-3 Tree T.
   -- print () = putStrLn (show ())
   let t1 = Empty
-  print (add (xList !! 0) t1)
-  let t2 = add (xList !! 0) t1
+  print (add (head xList) t1)
+  let t2 = add (head xList) t1
   print (add (xList !! 1) t2)
   let t3 = add (xList !! 1) t2
   print (add (xList !! 2) t3)
@@ -163,7 +164,7 @@ main = do
  -- Which displays the contetns of the 2-3 Tree in an easily readable format.
   let twoNodeTree = TwoNode 5 (TwoNode 1 Empty (TwoNode 3 Empty Empty)) (TwoNode 7 Empty Empty)
   print (layoutTree twoNodeTree)
-  
+
   print "----" -- Just to separate the function prints.
   -- Testing the print for TwoNode trees.
   putStrLn (prettyPrint twoNodeTree)
@@ -172,7 +173,7 @@ main = do
 
   -- Testing the prettyPrint for ThreeNode trees.
   -- print (layoutTree t7)
-  putStrLn (prettyPrint t7) 
+  putStrLn (prettyPrint t7)
 
 {- References:
 -- Used this link to figure out how to calculate the height of a tree data structure.
